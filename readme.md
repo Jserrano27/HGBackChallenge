@@ -38,10 +38,14 @@ Almost every possible exception is being handled by the <code>App\Exceptions\Han
 
 ## Search by Breed Name
 - Breeds search by name can be requested via <span style="color:green">GET</span> <a>http://localhost:XX/breeds</a>
-- The only query parameter accepted is <code><i>name</i></code>
+- The only query parameters accepted are <code><i>name</i></code> and <code><i>per_page</i></code>
+- The <code><i>name</i></code> parameter is required
+- The <code><i>per_page</i></code> parameter is optional. It's value must be between 2 and 50, and it's defualt value is 5
 
 Example:<br>
 <a>http://localhost:XX/breeds?name=fo</a> <i>(Search all breed names containing "fo")</i>
+<br>
+<a>http://localhost:XX/breeds?name=fo&per_page=20</a> <i>(Search all breed names containing "fo", showing 20 breeds per page)</i>
 
 ## Search by Breed ID
 - Breeds search by ID can be requested via <span style="color:green">GET</span> <a>http://localhost:XX/breeds/{id}</a>
@@ -55,9 +59,3 @@ Example:<br>
 **You can try the api using the following link:**
 <br>
 https://api.gatortest.tk
-
-
-
-
-
-
