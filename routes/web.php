@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/breeds', 'ContentController@getContentByName')->middleware('throttle:15.1');
+Route::get('/breeds/{id}', 'ContentController@getContentById')->middleware('throttle:15.1');
+
+Route::get('/', function() {
+    $data = json_encode(["message" => "HG Code Challenge"], JSON_PRETTY_PRINT);
+    echo "<pre>";
+    return $data;
 });
