@@ -3,11 +3,13 @@
 namespace App\Exceptions;
 
 use App\Traits\WebApiResponser;
+use Dotenv\Exception\ValidationException;
 use Exception;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Validation\ValidationException as IlluminateValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
@@ -68,7 +70,9 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ThrottleRequestsException) {
             return $this->errorResponse('Too Many Requests', 429);
         }
-
+        if ($exception instanceof IlluminateValidationException){
+            return $this->errorResponse($exception->getMessage(), 422);
+        }
         // For details of the exception make true the APP_DEBUG value on the .env file
         if(config('app.debug')){
             return parent::render($request, $exception);

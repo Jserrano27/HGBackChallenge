@@ -23,7 +23,7 @@ class ContentController extends WebApiController
             'query' => ['q' => isset($breedName) ? $breedName : $breedName=null],
         ]);
 
-        return $this->retrieveDataByName($breedName, $client);
+        return $this->retrieveDataByName($client);
     }
     
 
